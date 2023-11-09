@@ -12,8 +12,6 @@ var numUniqueEmails = function(emails) {
         
         if(!(newEmails.includes(emailFormat)))
             newEmails.push(emailFormat)
-    
-        email++;
     }    
 
     return newEmails.length;

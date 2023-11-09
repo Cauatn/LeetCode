@@ -5,46 +5,54 @@
 var numUniqueEmails = function(emails) {
     var email;
     var newEmails = [];
+    var cont = 0;
 
     for(email in emails)
     {
         emailFormat = formatEmail(emails[email]);
         
-        if(!(newEmails.includes(emailFormat)))
+        if(!(newEmails.includes(emailFormat))){
             newEmails.push(emailFormat)
-    }    
+            cont++
+        }
+            
+    }
 
-    return newEmails.length;
+    return cont;
 };
 
 formatEmail = function (email){
     newEmail =[""];
+    var i = 0;
+    tamanho = email.length;
 
-    for(letter in email)
-    {   
-        if(email[letter] != '.') {
-
-            if(email[letter] == '+') {
-                while(email[letter] != '@') {letter++};
+    while(i < tamanho)
+    {
+        if(email[i] != '.'){
+            if(email[i] == '+'){
+                while(email[i] != '@') i++;
             }
-
-            if(email[letter] == '@') {
-                while(email[letter] != undefined) {newEmail = newEmail + email[letter++]};
-                break;
-            }
-
-            newEmail = newEmail + email[letter];
+            newEmail = newEmail + email[i];
         }
+            
+        if(email[i] == '@'){
+            while(i < tamanho) {
+                i++;
+                newEmail = newEmail + email[i];
+            }
+            break;
+        }
+
+        i++;
     }
 
     return newEmail;
 }
 
 
-/*
-    console.log(
-        numUniqueEmails(["test.email+alex@leetcode.com",
-                    "test.e.mail+bob.cathy@leetcode.com",
-                    "testemail+david@lee.tcode.com"]
+console.log(
+    numUniqueEmails(["test.email+alex@leetcode.com",
+                "test.e.mail+bob.cathy@leetcode.com",
+                "testemail+david@lee.tcode.com"]
                 )
-)*/
+)
